@@ -1,0 +1,44 @@
+<form  method="post">
+   
+
+
+<div class="table-wrapper">
+    <button type="submit" (click)="showAssesments()">Show Assignments</button>
+    <table class="fl-table">
+        <thead>
+            <tr>
+                <th>Section_no</th>
+                <th>Type</th>
+                <th>Marks</th>
+                <th>Open</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dataItem of stAssesments">
+                <td>{{dataItem.section_no}}</td>
+                <td>{{dataItem.type}}</td>
+                <td>{{dataItem.marks}}</td>
+                <button type="button" class="btn btn-primary" (click)="showStudents(dataItem.aid)">Open</button>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Marks</th>
+            </tr>
+        </thead>
+        <tr *ngFor="let dataItem of students">
+            <td>{{dataItem.sid}}</td>
+            <td><input type = text placeholder={{dataItem.marks}} name="studentmarks" required [(ngModel)] = 'studentmarks[dataItem.sid]'></td>
+        </tr>
+</table>
+<button type="submit" (click)="updatemarks()"> Update Marks</button>
+</div>
+<div class="container" style="background-color:#f1f1f1">
+    <button type="submit"  (click)="logout()">Logout</button>
+</div>
+</form>

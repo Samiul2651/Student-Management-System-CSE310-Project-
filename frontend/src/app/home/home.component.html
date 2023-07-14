@@ -1,0 +1,44 @@
+<form  method="post">
+   
+    
+<div class="table-wrapper">
+    <button type="submit" (click)="showcourses()">Show Courses</button>
+    <table class="fl-table">
+        <thead>
+            <tr>
+                <th>Course Code</th>
+                <th>Section</th>
+                <th>Open</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dataItem of studentcourses">
+                <td>{{dataItem.course_code}}</td>
+                <td>{{dataItem.section}}</td>
+                <button type="button" class="btn btn-primary"  (click)="showMarks(dataItem)">Open</button>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Course Code</th>
+                <th>Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dataItem of coursemarks">
+                <td>{{dataItem.sid}}</td>
+                <td>{{course_name}}</td>
+                <td>{{dataItem.marks}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="container" style="background-color:#f1f1f1">
+    <button type="submit"  (click)="logout()">Logout</button>
+</div>
+</form>

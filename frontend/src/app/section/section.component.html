@@ -1,0 +1,112 @@
+<form  method="post">
+   
+    
+    <div class="table-wrapper">
+        <button type="submit" (click)="showAssesments()">Show Assesments</button>
+        <table class="fl-table">
+            <thead>
+                <tr>
+                    <th>Assesments</th>
+                    <th>Open</th>
+                    <th>ST</th>
+                    <th>Assign to ST</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let dataItem of assesments">
+                    <td>{{dataItem.type}}</td>
+                    <button type="button" class="btn btn-primary" (click)="showAssesmentStudents(dataItem.aid)">Open</button>
+                    <td>{{assign[dataItem.aid]}}</td>
+                    <button type="button" class="btn btn-primary" (click)="stAssign(dataItem.aid)">Assign</button>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="table-wrapper">
+        <button > Assesment Details</button>
+        <table class="fl-table">
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let dataItem of students">
+                    <td>{{dataItem.sid}}</td>
+                    <td><input type = text placeholder={{dataItem.marks}} name="studentmarks" required [(ngModel)] = 'studentmarks[dataItem.sid]'></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit" (click)="updatemarks()"> Update Marks</button>
+    </div>
+    <div class="table-wrapper">
+        <button type="submit" (click)="showAssesmentstype()">Create Assesments</button>
+        <table class="fl-table">
+            <thead>
+                <tr>
+                    <th>Assesments</th>
+                    <th>Marks</th>
+                    <th>Create</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let dataItem of assesmentstype">
+                    <td>{{dataItem}}</td>
+                    <td><input type = text placeholder=0.00 name="marks" required [(ngModel)] = 'marks'></td>
+                    <button type="button" class="btn btn-primary" (click)="createAssignment(dataItem)">Create</button>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-wrapper">
+        <button type="submit" (click)="showAssesments()">Overall</button>
+        <table class="fl-table">
+            <thead>
+                <tr>
+                    <th>Assesments</th>
+                    <th>Total</th>
+                    <th>Count</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of assesmentcount | keyvalue; let i = index">
+                    <td>{{item.key}}</td>
+                    <td>{{item.value}}</td>
+                    <td><input type = text placeholder={{item.value}} name="count" required [(ngModel)] = 'count[i]'></td>
+                    <td><input type = text placeholder={{item.value}} name="percentage" required [(ngModel)] = 'percentage[i]'></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary" (click)="publishMarks()">Publish Marks</button>
+    </div>
+
+    <div class="table-wrapper">
+        <button type="submit" (click)="showAllMarks()">Show All Marks</button>
+        <table class="fl-table">
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of allstudentmarks">
+                    <td>{{item.sid}}</td>
+                    <td>{{item.marks}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+        <button type="submit"  (click)="logout()">Logout</button>
+    </div>
+    
+
+    
+
+
+</form>
