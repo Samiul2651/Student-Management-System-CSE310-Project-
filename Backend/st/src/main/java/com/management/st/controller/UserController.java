@@ -49,21 +49,9 @@ public class UserController {
     public ArrayList<Assesments> StAssesment(@PathVariable("st_id") Long st_id){
         ArrayList<Assesments> assesments = new ArrayList<>();
         assesments = userService.getStAssesments(st_id);
-        //String rs = userService.toStringStAssesments(assesments);
         return assesments;
     }
-    /*
-    @GetMapping("sthome/assesments/{aid}")
-    public String StStudents(@PathVariable("aid") Long aid){
-        ArrayList<Long> course_and_section = new ArrayList<>();
-        course_and_section = userService.getCourseAndSection(aid);
-        ArrayList<Long> students = new ArrayList<>();
-        students = userService.getSectionStudents(course_and_section.get(0),course_and_section.get(1));
-        String rs = userService.toStringStudents(students);
-//        String rs = "" + course_and_section.get(0);
-        return rs;
-    }
-     */
+   
 
     @GetMapping("sthome/assesments/students/{aid}/{sid}/{marks}")
     public void StStudentMarksUpdate(@PathVariable("sid") Long sid, @PathVariable("marks") float marks, @PathVariable("aid") Long aid){
@@ -79,14 +67,12 @@ public class UserController {
     public ArrayList<CourseInfo> TeacherCoursesInfo(@PathVariable("tid") Long tid, @PathVariable("course_id") Long course_id){
         ArrayList<CourseInfo> courses = new ArrayList<>();
         courses = userService.getTeacherCoursesInfo(tid, course_id);
-        //String rs = userService.toStringTeacherCourses(courses);
         return courses;
     }
     @GetMapping("teacherhome/{tid}")
     public ArrayList<CourseName> TeacherCourses(@PathVariable("tid") Long tid){
         ArrayList<CourseName> courses = new ArrayList<>();
         courses = userService.getTeacherCourses(tid);
-        //String rs = userService.toStringTeacherCourses(courses);
         return courses;
     }
 
@@ -94,8 +80,6 @@ public class UserController {
     public ArrayList<Long> TeacherStudents(@PathVariable("course") Long course, @PathVariable("section") Long section){
         ArrayList<Long> students = new ArrayList<>();
         students = userService.getSectionStudents(course, section);
-        //String rs = userService.toStringStudents(students);
-//        String rs = "" + course_and_section.get(0);
         return students;
     }
 
@@ -103,8 +87,6 @@ public class UserController {
     public ArrayList<Long> StStudents(@PathVariable("course") Long course, @PathVariable("section") Long section){
         ArrayList<Long> students = new ArrayList<>();
         students = userService.getSectionStudents(course, section);
-        //String rs = userService.toStringStudents(students);
-//        String rs = "" + course_and_section.get(0);
         return students;
     }
 
@@ -165,11 +147,6 @@ public class UserController {
         return 1;
     }
 
-//    @GetMapping("st/updatemarks/{sid}/{marks}/{aid}")
-//    public int StUpdateMarks(@PathVariable("sid") Long sid, @PathVariable("marks") float marks, @PathVariable("aid") Long aid){
-//        userService.updateStudentMarks(sid,marks,aid);
-//        return 1;
-//    }
 
     @GetMapping("teacher/stassign/{aid}")
     public void Stassign(@PathVariable("aid") Long aid){
