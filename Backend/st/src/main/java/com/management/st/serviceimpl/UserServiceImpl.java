@@ -205,7 +205,6 @@ public class UserServiceImpl implements UserService {
 
     public ArrayList<Long> getCourseAndSection(Long aid){
         ArrayList<Long> course_and_section = new ArrayList<>();
-        //aid = (long)1;
         try{
             String query = "SELECT * FROM ASSESMENTS WHERE AID = '"+aid+"'";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -240,7 +239,6 @@ public class UserServiceImpl implements UserService {
                     a.setSt_assigned("1");
                     assesments.add(a);
                 }
-                //System.out.println(rs.getString(7));
             }
         }
         catch(SQLException e){
@@ -249,19 +247,7 @@ public class UserServiceImpl implements UserService {
         System.out.println(assesments);
         return assesments;
     }
-    /*
-    @Override
-    public String toStringStAssesments(ArrayList<Long> a){
-        String rs = "";
-        int n = a.size();
-        for(int i = 0;i < n-1;i++){
-            rs += a.get(i) + " ";
-        }
-        if(n != 0) {
-            rs += a.get(n - 1) + " ";
-        }
-        return rs;
-    }*/
+    
 
     @Override
     public String toStringStudents(ArrayList<Long> s){
@@ -297,9 +283,7 @@ public class UserServiceImpl implements UserService {
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet rs = statement.executeQuery(query);
             while(rs.next()){
-                //if(rs.getLong(6)==st_id) {
                 marks = rs.getFloat(3);
-                //}
             }
         }
         catch (SQLException e){
@@ -307,24 +291,7 @@ public class UserServiceImpl implements UserService {
         }
         return marks;
     }
-    /*
-    public String toStringTeacherCoursesInfo(ArrayList<ArrayList<Long>> courses){
-        String rs = "";
-        ArrayList<Long> a = courses.get(0);
-        ArrayList<Long> b = courses.get(1);
-        int n = a.size();
-        for(int i = 0;i < n-1;i++){
-            rs += a.get(i) + " ";
-            rs += b.get(i) + " ";
-        }
-        if(n != 0) {
-            rs += a.get(n - 1)+ " ";
-            rs += b.get(n-1);
-        }
-
-        return rs;
-    }
-     */
+    
 
     public ArrayList<StudentCourses> getStudentCourses(Long sid){
         ArrayList<StudentCourses> courses = new ArrayList<>();
@@ -334,12 +301,10 @@ public class UserServiceImpl implements UserService {
             ResultSet rs = statement.executeQuery(query);
             while(rs.next()){
                 StudentCourses S = new StudentCourses();
-                //if(rs.getLong(6)==st_id) {
                 S.setCourse_id(rs.getLong(2));
                 S.setCourse_code(rs.getString(6));
                 S.setSid(rs.getLong(1));
                 S.setSection(rs.getLong(5));
-                //}
                 courses.add(S);
             }
         }
@@ -538,7 +503,6 @@ public class UserServiceImpl implements UserService {
             String state = "SELECT * FROM ASSESMENTS WHERE COURSE_ID = "+course_id+" AND SECTION_NO ="+section_no+" AND TYPE = '"+type+"'";
             PreparedStatement statement = connection.prepareStatement(state);
             ResultSet rs = statement.executeQuery(state);
-            //System.out.println(statement);
             while(rs.next()){
                 Assesments a =new Assesments();
                 a.setAid(rs.getLong(1));
@@ -562,11 +526,7 @@ public class UserServiceImpl implements UserService {
                     rs = statement.executeQuery(state);
                     while(rs.next()){
                         float b = rs.getFloat(3);
-                        //System.out.println(b+" b");
-                        //System.out.println(assesments.get(j).getMarks()+" aa");
-                        //System.out.println(percentage);
                         float c = b*percentage /(float)assesments.get(j).getMarks();
-                        //System.out.println(c);
                         if(c == c) {
                             marks.add(c);
                         }
@@ -578,18 +538,14 @@ public class UserServiceImpl implements UserService {
                 count = Math.min(count,marks.size());
                 for(int j = 0;j < count;j++){
                     sm += marks.get(j);
-                    //System.out.println(marks.get(j));
                 }
                 float avg = sm/count;
-                //System.out.println(avg+" "+sm+" "+count);
-                //System.out.println(type+" "+avg);
                 if(avg != avg){
                     avg = 0;
                 }
                 state = "UPDATE STUDENT_ASSESMENTS SET MARKS = ? WHERE SID = "+Sid.get(i)+" AND ASSESMENT = '"+type+"'";
                 statement = connection.prepareStatement(state);
                 statement.setFloat(1,avg);
-                //System.out.println(statement);
                 statement.executeUpdate();
                 state ="SELECT * FROM STUDENT_ASSESMENTS WHERE SID = "+Sid.get(i);
                 statement = connection.prepareStatement(state);
@@ -601,7 +557,6 @@ public class UserServiceImpl implements UserService {
                 state = "UPDATE STUDENT_COURSES SET MARKS = ? WHERE SID = "+Sid.get(i)+" AND COURSE_ID = "+course_id+" AND SECTION ="+section_no;
                 statement = connection.prepareStatement(state);
                 statement.setFloat(1,num);
-                //System.out.println(statement);
                 statement.executeUpdate();
 
 
@@ -619,7 +574,6 @@ public class UserServiceImpl implements UserService {
             String state = "SELECT * FROM STUDENT_COURSES WHERE COURSE_ID = "+course_id+" AND SID = "+sid;
             PreparedStatement statement = connection.prepareStatement(state);
             ResultSet rs = statement.executeQuery(state);
-            //System.out.println(statement);
             while(rs.next()){
                 S.setSid(rs.getLong(1));
                 S.setMarks(rs.getFloat(3));
